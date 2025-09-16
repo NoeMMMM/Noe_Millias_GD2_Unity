@@ -1,5 +1,4 @@
 using UnityEngine;
-using Input = UnityEngine.Windows.Input;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement1 : MonoBehaviour
