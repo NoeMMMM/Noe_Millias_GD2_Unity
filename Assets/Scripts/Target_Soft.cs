@@ -7,8 +7,8 @@ public class Target_Soft : MonoBehaviour
     [SerializeField] private int _targetValue = 1;
     [SerializeField] private float _shadowDuration = 3f;
     [SerializeField] private float _particuleffect;
-    private float _shadowTimer = 0f;
-    private bool _isInShadow = false;
+    //private float _shadowTimer = 0f;
+    //private bool _isInShadow = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerCollect>() != null)

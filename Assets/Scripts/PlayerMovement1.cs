@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -6,6 +7,8 @@ public class PlayerMovement1 : MonoBehaviour
     private Rigidbody _rb;
     private float _horizontalMovement;
     private float _verticalMovement;
+    private Vector3 _grappinDirection;
+    private Vector3 _grappinHit;
     [SerializeField] float _speed = 2.0f;
 
     private Vector3 _movement;
@@ -32,5 +35,40 @@ public class PlayerMovement1 : MonoBehaviour
         {
             Debug.LogError("No RigidBody found !");
         }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            TryThrowGrappin();
+        }
+
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+            ThrowGrappin();
+        }
+    }
+
+    private void GrappinUpdateDirection(Vector3 direction)
+    {
+        if (direction.sqrMagnitude > 0.1f)
+        {
+            _grappinDirection = direction;
+
+        }
+    }
+
+    private void TryThrowGrappin()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, _grappinDirection, out hit,100f))
+        {
+            Debug.DrawRay(transform.position, _grappinDirection, Color.red);
+            _grappinHit = hit.point + hit.normal * 1.5f;
+        }
+    }
+
+    private void ThrowGrappin()
+    {
+        transform.position = _grappinHit;
+        _grappinDirection = Vector3.zero;
     }
 }
+
